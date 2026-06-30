@@ -553,6 +553,7 @@ input[type="range"].f-slider {
   width: 100%;
   border-collapse: collapse;
   font-size: 0.8rem;
+  table-layout: fixed;
 }
 
 .data-table thead th {
@@ -581,15 +582,16 @@ input[type="range"].f-slider {
 .data-table tbody tr:hover td { background: #f1f5f9; }
 .data-table tbody tr.is-selected td { background: #e0f2fe; }
 
-/* Column widths */
+/* Column widths — table-layout: fixed requires explicit widths */
 .col-star   { width: 28px; }
+.col-name   { width: 220px; overflow: hidden; }
+.col-loc    { width: 120px; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+.col-agency { width: 140px; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
 .col-stip   { width: 90px; }
+.col-hours  { width: 80px; text-align: right; }
 .col-slots  { width: 72px; }
 .col-acc    { width: 120px; }
-.col-hours  { width: 80px; text-align: right; }
 .col-elig   { width: 72px; }
-.col-loc    { white-space: nowrap; }
-.col-agency { max-width: 160px; }
 
 /* External link in site name cell */
 .row-extlink {
@@ -631,7 +633,6 @@ input[type="range"].f-slider {
 .row-star.starred { color: #f59e0b; }
 
 /* Site name cell */
-.col-name  { max-width: 220px; }
 .site-name { font-weight: 600; color: var(--text); overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
 .dept-name { font-size: 0.72rem; color: var(--text-muted); margin-top: 1px; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
 
