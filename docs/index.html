@@ -1,0 +1,265 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>APPIC Internship Explorer 2026–27</title>
+  <style>
+    :root {
+      --navy:       #1e3a5f;
+      --navy-dim:   #0c2640;
+      --navy-light: #2a4d7a;
+      --teal:       #0d9488;
+      --teal-light: #14b8a6;
+      --teal-dark:  #0f766e;
+      --on-dark:    #e0f2fe;
+      --bg:         #ffffff;
+      --bg-alt:     #f8fafc;
+      --border:     #e2e8f0;
+      --text:       #0f172a;
+      --text-muted: #64748b;
+    }
+
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+      font-size: 15px;
+      color: var(--text);
+      background: var(--bg-alt);
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+    }
+
+    a { color: var(--teal-dark); }
+
+    /* ── Header ─────────────────────────────────────────────── */
+    header {
+      background: var(--navy);
+      color: var(--on-dark);
+      padding: 14px 24px;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+
+    .header-title  { font-size: 1rem; font-weight: 700; letter-spacing: .01em; }
+    .header-cycle  {
+      background: var(--teal);
+      color: #fff;
+      font-size: .7rem;
+      font-weight: 700;
+      padding: 2px 7px;
+      border-radius: 99px;
+      letter-spacing: .04em;
+    }
+
+    /* ── Hero ───────────────────────────────────────────────── */
+    .hero {
+      background: linear-gradient(135deg, var(--navy-dim) 0%, var(--navy-light) 100%);
+      color: var(--on-dark);
+      text-align: center;
+      padding: 72px 24px 64px;
+    }
+
+    .hero-eyebrow {
+      font-size: .75rem;
+      font-weight: 600;
+      letter-spacing: .12em;
+      text-transform: uppercase;
+      color: var(--teal-light);
+      margin-bottom: 16px;
+    }
+
+    .hero h1 {
+      font-size: clamp(1.8rem, 4vw, 2.8rem);
+      font-weight: 800;
+      line-height: 1.15;
+      margin-bottom: 16px;
+    }
+
+    .hero h1 span { color: var(--teal-light); }
+
+    .hero-sub {
+      font-size: 1rem;
+      color: #b0cce8;
+      max-width: 520px;
+      margin: 0 auto 36px;
+      line-height: 1.6;
+    }
+
+    .cta-btn {
+      display: inline-block;
+      background: var(--teal);
+      color: #fff;
+      text-decoration: none;
+      font-weight: 700;
+      font-size: 1rem;
+      padding: 14px 36px;
+      border-radius: 8px;
+      transition: background .15s;
+    }
+    .cta-btn:hover { background: var(--teal-dark); }
+
+    .hero-note {
+      margin-top: 16px;
+      font-size: .78rem;
+      color: #7fa8c9;
+    }
+
+    /* ── Content sections ───────────────────────────────────── */
+    main {
+      flex: 1;
+      max-width: 760px;
+      width: 100%;
+      margin: 0 auto;
+      padding: 48px 24px 64px;
+      display: flex;
+      flex-direction: column;
+      gap: 36px;
+    }
+
+    .card {
+      background: var(--bg);
+      border: 1px solid var(--border);
+      border-radius: 12px;
+      padding: 28px 32px;
+    }
+
+    .card-icon {
+      font-size: 1.6rem;
+      margin-bottom: 10px;
+      display: block;
+    }
+
+    .card h2 {
+      font-size: 1.05rem;
+      font-weight: 700;
+      color: var(--navy);
+      margin-bottom: 12px;
+    }
+
+    .card p {
+      color: var(--text-muted);
+      line-height: 1.65;
+      margin-bottom: 10px;
+    }
+    .card p:last-child { margin-bottom: 0; }
+
+    /* Disclaimer card gets an amber-tinted left border */
+    .card-warn {
+      border-left: 4px solid #f59e0b;
+    }
+    .card-warn h2 { color: #92400e; }
+
+    ul.disc {
+      padding-left: 20px;
+      color: var(--text-muted);
+      line-height: 1.7;
+    }
+    ul.disc li { margin-bottom: 6px; }
+    ul.disc li:last-child { margin-bottom: 0; }
+
+    /* ── Footer ─────────────────────────────────────────────── */
+    footer {
+      background: var(--navy);
+      color: #7090b0;
+      text-align: center;
+      font-size: .78rem;
+      padding: 18px 24px;
+    }
+    footer a { color: var(--teal-light); text-decoration: none; }
+    footer a:hover { text-decoration: underline; }
+  </style>
+</head>
+<body>
+
+  <!-- Header -->
+  <header>
+    <span class="header-title">APPIC Internship Explorer</span>
+    <span class="header-cycle">2026–27</span>
+  </header>
+
+  <!-- Hero -->
+  <section class="hero">
+    <p class="hero-eyebrow">Predoctoral Internship Search Tool</p>
+    <h1>Find your <span>APPIC internship</span><br>for the 2026–27 match</h1>
+    <p class="hero-sub">
+      Browse, filter, and compare 774 APPIC-listed predoctoral internship sites
+      on an interactive map — built for psychology doctoral students.
+    </p>
+    <a href="./app.html" class="cta-btn">Explore Internship Sites →</a>
+    <p class="hero-note">Data snapshot: June 1, 2026</p>
+  </section>
+
+  <!-- Content -->
+  <main>
+
+    <!-- Who this is for -->
+    <div class="card">
+      <span class="card-icon">🎓</span>
+      <h2>Who this tool is for</h2>
+      <p>
+        This explorer is designed for <strong>PhD and PsyD students</strong> applying to
+        APPIC-listed predoctoral internship sites in the <strong>2026–27 match cycle</strong>.
+      </p>
+      <p>
+        The tool lets you filter sites by program type (clinical, counseling, school psychology),
+        agency type, APA accreditation status, stipend range, minimum hour requirements, and more —
+        then view them on a map and build a personal shortlist you can export to CSV.
+      </p>
+      <p>
+        It is intended as an <strong>exploratory aid</strong> to help you identify programs worth
+        investigating further, not as a substitute for reading each site's full DCTC or contacting
+        training directors directly.
+      </p>
+    </div>
+
+    <!-- Disclaimer -->
+    <div class="card card-warn">
+      <span class="card-icon">⚠️</span>
+      <h2>Important: Verify all information before applying</h2>
+      <p>
+        This site displays a <strong>static snapshot</strong> scraped from the public
+        <a href="https://www.appic.org/Internships/Search-the-AI-and-AOI"
+           target="_blank" rel="noopener noreferrer">APPIC online directory</a>
+        on <strong>June 1, 2026</strong>. Please be aware of the following limitations:
+      </p>
+      <ul class="disc">
+        <li>
+          <strong>Data may be outdated.</strong> Training programs update their directory listings
+          throughout the year. Stipends, available positions, eligibility requirements, and
+          accreditation status can change after the snapshot date.
+        </li>
+        <li>
+          <strong>Data is self-reported.</strong> Information is entered by the training sites
+          themselves. Errors, omissions, and inconsistencies in the original APPIC directory
+          are reflected here.
+        </li>
+        <li>
+          <strong>Not all fields are guaranteed accurate.</strong> Some sites leave fields blank
+          or report placeholder values. Always read the site's DCTC brochure for authoritative details.
+        </li>
+        <li>
+          <strong>This tool is not affiliated with APPIC.</strong> It is an independent resource
+          created to make the publicly available data easier to explore. For official match
+          information, use the
+          <a href="https://www.appic.org" target="_blank" rel="noopener noreferrer">APPIC website</a>
+          and the AAPI Online portal directly.
+        </li>
+      </ul>
+    </div>
+
+  </main>
+
+  <!-- Footer -->
+  <footer>
+    Data sourced from the public
+    <a href="https://www.appic.org/Internships/Search-the-AI-and-AOI"
+       target="_blank" rel="noopener noreferrer">APPIC directory</a>
+    · Snapshot date: June 1, 2026 · Not affiliated with APPIC
+  </footer>
+
+</body>
+</html>
