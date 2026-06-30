@@ -100,19 +100,19 @@ function buildBody(s) {
   // Key information
   parts.push(section('Key Information', grid([
     field('Annual Stipend', formatStipend(s.ft_stipend)),
-    field('FT Slots', s.ft_slots ?? '—'),
-    field('Application Deadline', formatDate(s.application_due_date) || '—'),
-    field('Start Date', s.start_date || '—'),
-    field('APA Accreditation', s.apa_accreditation || '—'),
-    field('CPA Accreditation', s.cpa_accreditation || '—'),
+    field('FT Slots', s.ft_slots ?? '-'),
+    field('Application Deadline', formatDate(s.application_due_date) || '-'),
+    field('Start Date', s.start_date || '-'),
+    field('APA Accreditation', s.apa_accreditation || '-'),
+    field('CPA Accreditation', s.cpa_accreditation || '-'),
     field('Accepting Applicants', formatBool(s.accepting_applicants)),
     field('Fringe Benefits', cleanFringe(s.fringe_benefits), true),
   ])));
 
   // Eligibility
   const citizenVal = s.us_citizenship_required
-    ? '<span class="d-value warn">⚠ Yes — US citizenship required</span>'
-    : '<span class="d-value">No — International applicants welcome</span>';
+    ? '<span class="d-value warn">⚠ Yes, US citizenship required</span>'
+    : '<span class="d-value">No, international applicants welcome</span>';
 
   parts.push(section('Eligibility', grid([
     field('Accepts Counseling', formatBool(s.accepts_counseling)),
@@ -120,7 +120,7 @@ function buildBody(s) {
     field('Accepts School',     formatBool(s.accepts_school)),
     field('Accepts PhD',        formatBool(s.accepts_phd)),
     field('Accepts PsyD',       formatBool(s.accepts_psyd)),
-    field('Min. Years in Program', s.min_years_grad != null ? s.min_years_grad : '—'),
+    field('Min. Years in Program', s.min_years_grad != null ? s.min_years_grad : '-'),
     fieldRaw('US Citizenship Required', citizenVal),
     field('Work Auth Required', formatBool(s.noncitizen_work_auth_required)),
   ])));
@@ -130,8 +130,8 @@ function buildBody(s) {
     field('Intervention Hours', s.min_intervention_hours != null ? s.min_intervention_hours : 'No minimum'),
     field('Assessment Hours',   s.min_assessment_hours   != null ? s.min_assessment_hours   : 'No minimum'),
     field('Combined Hours',     s.min_combined_hours     != null ? s.min_combined_hours     : 'No minimum'),
-    field('Research Level',     s.research_level ? LEVEL_LABEL[s.research_level] : '—'),
-    field('Assessment Mod. Level', s.assessment_modality_level ? LEVEL_LABEL[s.assessment_modality_level] : '—'),
+    field('Research Level',     s.research_level ? LEVEL_LABEL[s.research_level] : '-'),
+    field('Assessment Mod. Level', s.assessment_modality_level ? LEVEL_LABEL[s.assessment_modality_level] : '-'),
   ])));
 
   // Populations
@@ -173,7 +173,7 @@ function buildBody(s) {
   // Location note
   if (!s.geocode_exact) {
     parts.push(`<p style="font-size:0.73rem;color:var(--text-muted);margin-top:8px">
-      ⚠ Map location is approximate (state-centroid). Actual address: ${esc(s.address || '—')}
+      ⚠ Map location is approximate (state-centroid). Actual address: ${esc(s.address || '-')}
     </p>`);
   }
 

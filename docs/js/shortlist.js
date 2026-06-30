@@ -39,6 +39,25 @@ export function getShortlist() {
 }
 
 // ── Compare table ────────────────────────────────────────────
+// Fields shown as columns, one row per shortlisted site — reads naturally
+// for the typical 10-15 sites applicants actually shortlist.
+const FIELDS = [
+  { label: 'Agency Type',           fn: s => s.primary_agency_type || '-' },
+  { label: 'APA Accreditation',     fn: s => s.apa_accreditation || '-' },
+  { label: 'Stipend',               fn: s => formatStipend(s.ft_stipend) },
+  { label: 'FT Slots',              fn: s => s.ft_slots ?? '-' },
+  { label: 'Deadline',              fn: s => formatDate(s.application_due_date) },
+  { label: 'Start Date',            fn: s => s.start_date || '-' },
+  { label: 'Min. Intervention Hrs', fn: s => s.min_intervention_hours ?? 'No min' },
+  { label: 'Min. Assessment Hrs',   fn: s => s.min_assessment_hours ?? 'No min' },
+  { label: 'Accepts Counseling',    fn: s => formatBool(s.accepts_counseling) },
+  { label: 'Accepts Clinical',      fn: s => formatBool(s.accepts_clinical) },
+  { label: 'US Citizenship Req.',   fn: s => s.us_citizenship_required ? '⚠ Yes' : 'No' },
+  { label: 'Accepting Applicants',  fn: s => formatBool(s.accepting_applicants) },
+  { label: 'Research Level',        fn: s => s.research_level || '-' },
+  { label: 'Assessment Level',      fn: s => s.assessment_modality_level || '-' },
+];
+
 export function renderShortlist() {
   const head = document.getElementById('compareHead');
   const body = document.getElementById('compareBody');
@@ -51,42 +70,35 @@ export function renderShortlist() {
     return;
   }
 
-  // Column headers = site names
+  // Column headers = fields
   head.innerHTML = `<tr>
-    <th class="row-label">Field</th>
-    ${sites.map(s => `
-      <th>
-        <div class="site-col-head">${esc(s.site)}</div>
-        <div class="site-col-city">${esc(s.city)}, ${esc(s.state)}</div>
-      </th>
-    `).join('')}
+    <th class="row-label">Site</th>
+    ${FIELDS.map(f => `<th>${esc(f.label)}</th>`).join('')}
+    <th class="col-remove" aria-label="Remove"></th>
   </tr>`;
 
-  // Rows = fields
-  const FIELDS = [
-    { label: 'Agency Type',          fn: s => s.primary_agency_type || '—' },
-    { label: 'APA Accreditation',    fn: s => s.apa_accreditation || '—' },
-    { label: 'Annual Stipend',       fn: s => formatStipend(s.ft_stipend) },
-    { label: 'FT Slots',             fn: s => s.ft_slots ?? '—' },
-    { label: 'Application Deadline', fn: s => formatDate(s.application_due_date) },
-    { label: 'Start Date',           fn: s => s.start_date || '—' },
-    { label: 'Min. Intervention Hrs',fn: s => s.min_intervention_hours ?? 'No min' },
-    { label: 'Min. Assessment Hrs',  fn: s => s.min_assessment_hours ?? 'No min' },
-    { label: 'Accepts Counseling',   fn: s => formatBool(s.accepts_counseling) },
-    { label: 'Accepts Clinical',     fn: s => formatBool(s.accepts_clinical) },
-    { label: 'US Citizenship Req.',  fn: s => s.us_citizenship_required ? '⚠ Yes' : 'No' },
-    { label: 'Accepting Applicants', fn: s => formatBool(s.accepting_applicants) },
-    { label: 'Research Level',       fn: s => s.research_level || '—' },
-    { label: 'Assessment Level',     fn: s => s.assessment_modality_level || '—' },
-  ];
-
-  body.innerHTML = FIELDS.map(f => `
-    <tr>
-      <td class="row-label">${esc(f.label)}</td>
-      ${sites.map(s => `<td>${esc(String(f.fn(s)))}</td>`).join('')}
+  // Rows = sites
+  body.innerHTML = sites.map(s => `
+    <tr data-sid="${esc(siteId(s))}" class="compare-row">
+      <td class="row-label">
+        <div class="site-col-head">${esc(s.site)}</div>
+        <div class="site-col-city">${esc(s.city)}, ${esc(s.state)}</div>
+      </td>
+      ${FIELDS.map(f => `<td>${esc(String(f.fn(s)))}</td>`).join('')}
+      <td class="td-star">
+        <button class="row-star starred" data-remove-id="${esc(siteId(s))}"
+                aria-label="Remove from shortlist" title="Remove from shortlist">★</button>
+      </td>
     </tr>
   `).join('');
 }
+
+document.getElementById('compareBody')?.addEventListener('click', e => {
+  const btn = e.target.closest('[data-remove-id]');
+  if (!btn) return;
+  const site = shortlist.get(btn.dataset.removeId);
+  if (site) toggleStar(site);
+});
 
 // ── CSV export ───────────────────────────────────────────────
 function exportCsv() {

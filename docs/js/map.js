@@ -98,7 +98,7 @@ export function renderMarkers(data, onClickFn) {
         <div class="tt-loc">${esc(site.city)}, ${esc(site.state)}${locNote}</div>
         <div class="tt-meta">
           <span>Stipend: <strong>${stipendStr}</strong></span>
-          <span>Slots: <strong>${site.ft_slots ?? '—'}</strong></span>
+          <span>Slots: <strong>${site.ft_slots ?? '-'}</strong></span>
         </div>
       </div>
     `, { sticky: true, className: 'site-tooltip', opacity: 1 });

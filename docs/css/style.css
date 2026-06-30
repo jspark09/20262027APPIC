@@ -674,39 +674,46 @@ input[type="range"].f-slider {
 }
 
 /* ── Compare table ──────────────────────────────────────────── */
+/* Sites as rows, fields as columns — keeps height reasonable for the
+   10-15 sites applicants typically shortlist, instead of one column per site. */
 .compare-table { min-width: max-content; }
-.compare-table th, .compare-table td { min-width: 150px; }
+.compare-table th, .compare-table td { min-width: 110px; white-space: nowrap; }
 
 .compare-table .row-label {
   position: sticky;
   left: 0;
-  background: var(--bg-alt);
+  background: var(--bg);
   z-index: 1;
-  min-width: 160px;
-  max-width: 160px;
-  font-weight: 600;
-  font-size: 0.75rem;
-  color: var(--text-muted);
-  text-transform: uppercase;
-  letter-spacing: 0.04em;
+  min-width: 220px;
+  max-width: 220px;
+  white-space: normal;
+  border-right: 1px solid var(--border);
 }
+
+.compare-table tbody tr:hover .row-label { background: #f1f5f9; }
+.compare-table tbody tr.is-selected .row-label { background: #e0f2fe; }
 
 .compare-table thead th:first-child {
   position: sticky;
   left: 0;
   z-index: 3;
+  background: var(--bg-alt);
 }
 
 .compare-table thead th {
-  font-size: 0.75rem;
+  font-size: 0.69rem;
   font-weight: 700;
-  color: var(--text);
-  text-transform: none;
-  letter-spacing: 0;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  color: var(--text-muted);
 }
 
-.compare-table thead .site-col-head { font-size: 0.75rem; }
-.compare-table thead .site-col-city { font-size: 0.68rem; color: var(--text-muted); font-weight: 400; }
+.compare-table .site-col-head { font-size: 0.8rem; font-weight: 600; color: var(--text); }
+.compare-table .site-col-city { font-size: 0.7rem; color: var(--text-muted); font-weight: 400; margin-top: 1px; }
+
+.compare-table .col-remove { width: 36px; min-width: 36px; }
+.compare-table .compare-row:hover td { background: #f8fafc; }
+.compare-table .compare-row:hover .row-label { background: #f1f5f9; }
 
 /* ── Main panel resize when slide-over is open ──────────────── */
 .main-panel {

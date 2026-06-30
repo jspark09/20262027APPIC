@@ -20,7 +20,7 @@ export function formatStipend(val) {
 }
 
 export function formatDate(str) {
-  if (!str) return '—';
+  if (!str) return '-';
   const m = str.match(/^(\d{1,2})\/(\d{1,2})\/(\d{4})/);
   if (!m) return str;
   return `${m[3]}-${m[1].padStart(2,'0')}-${m[2].padStart(2,'0')}`;
@@ -46,12 +46,12 @@ export function siteId(site) {
 
 // Clean up fringe benefits: comma-separated, strip excess whitespace
 export function cleanFringe(raw) {
-  if (!raw) return '—';
+  if (!raw) return '-';
   return raw
     .split(',')
     .map(s => s.replace(/\s+/g, ' ').trim())
     .filter(Boolean)
-    .join(', ') || '—';
+    .join(', ') || '-';
 }
 
 // HTML-escape a value for safe insertion into innerHTML

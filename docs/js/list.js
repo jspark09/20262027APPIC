@@ -71,7 +71,7 @@ function buildRow(site, idx, hasHours) {
     : '';
 
   const accredClass = accredCssClass(site.apa_accreditation);
-  const accredText  = esc(site.apa_accreditation || '—');
+  const accredText  = esc(site.apa_accreditation || '-');
 
   let eligCell = '';
   if (hasHours) {
@@ -97,9 +97,9 @@ function buildRow(site, idx, hasHours) {
       ${site.department ? `<div class="dept-name">${esc(site.department)}</div>` : ''}
     </td>
     <td class="col-loc" role="gridcell">${esc(site.city)}, ${esc(site.state)}</td>
-    <td class="col-agency" role="gridcell">${esc(site.primary_agency_type || '—')}</td>
+    <td class="col-agency" role="gridcell">${esc(site.primary_agency_type || '-')}</td>
     <td class="col-stip" role="gridcell">${formatStipend(site.ft_stipend)}</td>
-    <td class="col-slots" role="gridcell">${site.ft_slots ?? '—'}</td>
+    <td class="col-slots" role="gridcell">${site.ft_slots ?? '-'}</td>
     <td class="col-acc" role="gridcell">
       <span class="acc-badge ${accredClass}">${accredText}</span>
     </td>

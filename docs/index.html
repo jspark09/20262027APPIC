@@ -153,6 +153,17 @@
     }
     .card-warn h2 { color: #92400e; }
 
+    /* Intro card gets a teal-tinted left border */
+    .card-intro {
+      border-left: 4px solid var(--teal);
+      display: flex;
+      gap: 18px;
+      align-items: flex-start;
+    }
+    .card-intro .card-icon { font-size: 1.8rem; margin-bottom: 0; }
+    .card-intro p { margin-bottom: 0; line-height: 1.65; color: var(--text-muted); }
+    .card-intro strong { color: var(--text); }
+
     ul.disc {
       padding-left: 20px;
       color: var(--text-muted);
@@ -187,7 +198,7 @@
     <h1>Find your <span>APPIC internship</span><br>for the 2026–27 match</h1>
     <p class="hero-sub">
       Browse, filter, and compare 774 APPIC-listed predoctoral internship sites
-      on an interactive map — built for psychology doctoral students.
+      on an interactive map, built for psychology doctoral students.
     </p>
     <a href="./app.html" class="cta-btn">Explore Internship Sites →</a>
     <p class="hero-note">Data snapshot: June 1, 2026</p>
@@ -195,6 +206,18 @@
 
   <!-- Content -->
   <main>
+
+    <!-- About the creator -->
+    <div class="card card-intro">
+      <span class="card-icon">👋</span>
+      <p>
+        Hi! I'm <strong><a href="https://junsangpark.com" target="_blank" rel="noopener noreferrer">Junsang Park</a></strong>,
+        a doctoral student in the Counseling Psychology program at the University of Florida.
+        I built this tool to make the APPIC internship search a little easier for fellow applicants.
+        If you have any questions, suggestions, or run into anything off,
+        feel free to reach out!
+      </p>
+    </div>
 
     <!-- Who this is for -->
     <div class="card">
@@ -206,7 +229,7 @@
       </p>
       <p>
         The tool lets you filter sites by program type (clinical, counseling, school psychology),
-        agency type, APA accreditation status, stipend range, minimum hour requirements, and more —
+        agency type, APA accreditation status, stipend range, minimum hour requirements, and more,
         then view them on a map and build a personal shortlist you can export to CSV.
       </p>
       <p>

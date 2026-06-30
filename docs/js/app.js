@@ -34,6 +34,7 @@ async function boot() {
   initMap('map');
   initDetail();
   initShortlist();
+  renderShortlist(); // populate the shortlist panel immediately, don't wait for a star click
 
   // Sync list to map viewport on every pan/zoom
   window.addEventListener('appic:bounds-change', e => {
