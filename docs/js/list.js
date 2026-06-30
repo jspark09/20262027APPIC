@@ -99,12 +99,12 @@ function buildRow(site, idx, hasHours) {
     <td class="col-loc" role="gridcell">${esc(site.city)}, ${esc(site.state)}</td>
     <td class="col-agency" role="gridcell">${esc(site.primary_agency_type || '-')}</td>
     <td class="col-stip" role="gridcell">${formatStipend(site.ft_stipend)}</td>
+    <td class="col-hours" role="gridcell">${site.min_intervention_hours ?? '-'}</td>
+    <td class="col-hours" role="gridcell">${site.min_assessment_hours ?? '-'}</td>
     <td class="col-slots" role="gridcell">${site.ft_slots ?? '-'}</td>
     <td class="col-acc" role="gridcell">
       <span class="acc-badge ${accredClass}">${accredText}</span>
     </td>
-    <td class="col-hours" role="gridcell">${site.min_intervention_hours ?? '-'}</td>
-    <td class="col-hours" role="gridcell">${site.min_assessment_hours ?? '-'}</td>
     ${eligCell}
   </tr>`;
 }

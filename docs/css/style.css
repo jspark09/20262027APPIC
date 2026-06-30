@@ -631,8 +631,9 @@ input[type="range"].f-slider {
 .row-star.starred { color: #f59e0b; }
 
 /* Site name cell */
-.site-name { font-weight: 600; color: var(--text); }
-.dept-name { font-size: 0.72rem; color: var(--text-muted); margin-top: 1px; }
+.col-name  { max-width: 220px; }
+.site-name { font-weight: 600; color: var(--text); overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+.dept-name { font-size: 0.72rem; color: var(--text-muted); margin-top: 1px; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
 
 /* Approximate badge */
 .approx-badge {
