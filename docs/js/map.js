@@ -77,13 +77,13 @@ export function renderMarkers(data, onClickFn) {
     const isApprox = !site.geocode_exact;
 
     const marker = L.circleMarker([pos.lat, pos.lng], {
-      radius:      7,
-      fillColor:   isApprox ? 'transparent' : EXACT_COLOR,
-      color:       isApprox ? APPROX_COLOR  : '#fff',
-      weight:      isApprox ? 2.5 : 1,
+      radius:      8,
+      fillColor:   isApprox ? '#ffffff' : EXACT_COLOR,
+      color:       isApprox ? APPROX_COLOR  : '#ffffff',
+      weight:      isApprox ? 2.5 : 2.5,
       dashArray:   isApprox ? '5 3' : null,
-      fillOpacity: isApprox ? 0 : 0.88,
-      opacity:     0.95,
+      fillOpacity: isApprox ? 0.55 : 1,
+      opacity:     1,
     });
 
     const stipendStr = site.ft_stipend != null
