@@ -586,6 +586,7 @@ input[type="range"].f-slider {
 .col-stip   { width: 90px; }
 .col-slots  { width: 72px; }
 .col-acc    { width: 120px; }
+.col-hours  { width: 80px; text-align: right; }
 .col-elig   { width: 72px; }
 .col-loc    { white-space: nowrap; }
 .col-agency { max-width: 160px; }

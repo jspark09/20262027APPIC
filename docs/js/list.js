@@ -16,7 +16,7 @@ export function renderList(data, sortKey, myHours) {
 
   const tbody = document.getElementById('resultsBody');
   if (!currentData.length) {
-    const cols = hasHours ? 8 : 7; // star + name + loc + agency + stip + slots + acc [+ elig]
+    const cols = hasHours ? 10 : 9; // star + name + loc + agency + stip + slots + acc + intv-hrs + asmt-hrs [+ elig]
     tbody.innerHTML = `<tr><td colspan="${cols}" class="td-msg">No sites match the current filters.</td></tr>`;
     return;
   }
@@ -103,6 +103,8 @@ function buildRow(site, idx, hasHours) {
     <td class="col-acc" role="gridcell">
       <span class="acc-badge ${accredClass}">${accredText}</span>
     </td>
+    <td class="col-hours" role="gridcell">${site.min_intervention_hours ?? '-'}</td>
+    <td class="col-hours" role="gridcell">${site.min_assessment_hours ?? '-'}</td>
     ${eligCell}
   </tr>`;
 }
