@@ -42,7 +42,7 @@ export function getShortlist() {
 // Fields shown as columns, one row per shortlisted site — reads naturally
 // for the typical 10-15 sites applicants actually shortlist.
 const FIELDS = [
-  { label: 'Agency Type',           fn: s => s.primary_agency_type || '-' },
+  { label: 'Agency Type',           fn: s => s.primary_agency_type || '-', truncate: true },
   { label: 'APA Accreditation',     fn: s => s.apa_accreditation || '-' },
   { label: 'Stipend',               fn: s => formatStipend(s.ft_stipend) },
   { label: 'FT Slots',              fn: s => s.ft_slots ?? '-' },
@@ -84,7 +84,12 @@ export function renderShortlist() {
         <div class="site-col-head">${esc(s.site)}</div>
         <div class="site-col-city">${esc(s.city)}, ${esc(s.state)}</div>
       </td>
-      ${FIELDS.map(f => `<td>${esc(String(f.fn(s)))}</td>`).join('')}
+      ${FIELDS.map(f => {
+        const val = esc(String(f.fn(s)));
+        return f.truncate
+          ? `<td class="td-trunc" title="${val}">${val}</td>`
+          : `<td>${val}</td>`;
+      }).join('')}
       <td class="td-star">
         <button class="row-star starred" data-remove-id="${esc(siteId(s))}"
                 aria-label="Remove from shortlist" title="Remove from shortlist">★</button>

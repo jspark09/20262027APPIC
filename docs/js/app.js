@@ -16,7 +16,6 @@ let mapBounds    = null; // null until first moveend fires
 // ── Boot ─────────────────────────────────────────────────────
 async function boot() {
   setupSidebarToggle();
-  setupShortlistToggle();
   setupSortListener();
 
   // Load data
@@ -36,7 +35,8 @@ async function boot() {
   initDetail();
   initShortlist();
   initResizeHandle();
-  initCollapseToggles();
+  initTabSwitcher();
+  initCollapseToggle();
   initTour();
   renderShortlist(); // populate the shortlist panel immediately, don't wait for a star click
 
@@ -53,10 +53,6 @@ async function boot() {
   document.getElementById('clearFiltersBtn').addEventListener('click', clearAllFilters);
   initFilters(options, onFiltersChange);
 
-  // Update shortlist count badge
-  window.addEventListener('appic:shortlist-change', e => {
-    document.getElementById('shortlistCount').textContent = e.detail.count;
-  });
 }
 
 // ── Filter change handler ────────────────────────────────────
@@ -129,40 +125,31 @@ function setupSidebarToggle() {
   });
 }
 
-// ── Shortlist view toggle ─────────────────────────────────────
-function setupShortlistToggle() {
-  const btn      = document.getElementById('shortlistBtn');
-  const results  = document.getElementById('resultsPanel');
-  const slPanel  = document.getElementById('shortlistPanel');
+// ── Tab switcher (List / My Shortlist) ───────────────────────
+function initTabSwitcher() {
+  const tabList      = document.getElementById('tabList');
+  const tabShortlist = document.getElementById('tabShortlist');
+  const resultsPanel = document.getElementById('resultsPanel');
+  const slPanel      = document.getElementById('shortlistPanel');
 
-  function setResultsMode(count) {
-    slPanel.hidden = true;
-    results.hidden = false;
-    btn.setAttribute('aria-pressed', 'false');
-    btn.innerHTML  = `☆ Shortlist (<span id="shortlistCount">${count}</span>)`;
+  function switchTo(tab) {
+    const toList = tab === 'list';
+    tabList.classList.toggle('is-active', toList);
+    tabList.setAttribute('aria-selected', String(toList));
+    tabShortlist.classList.toggle('is-active', !toList);
+    tabShortlist.setAttribute('aria-selected', String(!toList));
+    resultsPanel.hidden = !toList;
+    slPanel.hidden      = toList;
+    if (!toList) renderShortlist();
   }
 
-  function setShortlistMode() {
-    results.hidden = true;
-    slPanel.hidden = false;
-    btn.setAttribute('aria-pressed', 'true');
-    btn.textContent = '← Back to Results';
-    renderShortlist();
-  }
-
-  btn.addEventListener('click', () => {
-    if (slPanel.hidden) {
-      setShortlistMode();
-    } else {
-      const count = document.getElementById('shortlistCount')?.textContent ?? '0';
-      setResultsMode(count);
-    }
-  });
+  tabList.addEventListener('click',      () => switchTo('list'));
+  tabShortlist.addEventListener('click', () => switchTo('shortlist'));
 
   window.addEventListener('appic:shortlist-change', e => {
+    const badge = document.getElementById('shortlistCount');
+    if (badge) badge.textContent = e.detail.count;
     if (!slPanel.hidden) renderShortlist();
-    const countEl = document.getElementById('shortlistCount');
-    if (countEl) countEl.textContent = e.detail.count;
   });
 }
 
@@ -194,40 +181,26 @@ function deriveOptions(data) {
   };
 }
 
-// ── Collapsible list / shortlist panels ──────────────────────
-function initCollapseToggles() {
+// ── Collapsible panel toggle ──────────────────────────────────
+function initCollapseToggle() {
   const mainPanel  = document.getElementById('mainPanel');
   const mapSection = document.querySelector('.map-section');
+  const btn        = document.getElementById('listCollapseBtn');
 
-  function setCollapsed(panel, btn, collapsed) {
-    panel.classList.toggle('is-collapsed', collapsed);
+  btn.addEventListener('click', () => {
+    const collapsed = !mainPanel.classList.contains('list-collapsed');
+    mainPanel.classList.toggle('list-collapsed', collapsed);
     btn.classList.toggle('is-collapsed', collapsed);
-    btn.setAttribute('aria-label', collapsed ? 'Expand' : 'Collapse');
+    btn.setAttribute('aria-label', collapsed ? 'Expand panel' : 'Collapse panel');
 
-    // Let map fill space when panel is collapsed; restore saved height when expanded
     if (collapsed) {
       mainPanel._savedMapHeight = mapSection.style.height;
       mapSection.style.height   = '';
-      mainPanel.classList.add('list-collapsed');
     } else {
-      mainPanel.classList.remove('list-collapsed');
-      if (mainPanel._savedMapHeight) {
-        mapSection.style.height = mainPanel._savedMapHeight;
-      }
+      if (mainPanel._savedMapHeight) mapSection.style.height = mainPanel._savedMapHeight;
       resizeMap();
     }
-  }
-
-  function wire(panelId, btnId) {
-    const panel = document.getElementById(panelId);
-    const btn   = document.getElementById(btnId);
-    btn.addEventListener('click', () => {
-      setCollapsed(panel, btn, !panel.classList.contains('is-collapsed'));
-    });
-  }
-
-  wire('resultsPanel',   'resultsCollapseBtn');
-  wire('shortlistPanel', 'shortlistCollapseBtn');
+  });
 }
 
 // ── Map resize handle ─────────────────────────────────────────

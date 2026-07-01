@@ -14,9 +14,9 @@ const STEPS = [
     placement: 'above',
   },
   {
-    target:    '#shortlistBtn',
+    target:    '#tabShortlist',
     title:     'My Shortlist',
-    msg:       'Starred sites are collected here. Open the shortlist and click "Export CSV" to download a summary of your saved sites.',
+    msg:       'Starred sites are collected here. Switch to this tab any time, then click "Export CSV" to download a summary of your saved sites.',
     placement: 'below',
   },
 ];

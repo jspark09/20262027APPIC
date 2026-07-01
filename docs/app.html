@@ -21,9 +21,6 @@
         <span class="header-title">APPIC Internship Explorer</span>
         <span class="header-cycle">2026–27</span>
       </div>
-      <button class="shortlist-btn" id="shortlistBtn" aria-pressed="false">
-        ☆ Shortlist (<span id="shortlistCount">0</span>)
-      </button>
     </div>
     <div class="header-banner" role="note">
       Self-reported snapshot scraped from the APPIC directory on
@@ -64,11 +61,24 @@
            role="separator" aria-orientation="horizontal"
            title="Drag to resize map" aria-label="Drag to resize map"></div>
 
+      <!-- Tab bar -->
+      <div class="list-tab-bar" id="listTabBar">
+        <div class="tab-pills" role="tablist" aria-label="View">
+          <button class="tab-pill is-active" id="tabList"
+                  role="tab" aria-selected="true" aria-controls="resultsPanel">List</button>
+          <button class="tab-pill" id="tabShortlist"
+                  role="tab" aria-selected="false" aria-controls="shortlistPanel">
+            My Shortlist
+            <span class="shortlist-badge" id="shortlistCount">0</span>
+          </button>
+        </div>
+        <button class="panel-collapse-btn" id="listCollapseBtn"
+                aria-label="Collapse panel" title="Collapse panel">▾</button>
+      </div>
+
       <!-- Results table -->
-      <section class="results-panel" id="resultsPanel" aria-label="Internship results">
+      <section class="tab-panel results-panel" id="resultsPanel" role="tabpanel" aria-label="Internship results">
         <div class="results-bar">
-          <button class="panel-collapse-btn" id="resultsCollapseBtn"
-                  aria-label="Collapse list" title="Collapse list">▾</button>
           <span class="results-info" id="resultsInfo" aria-live="polite">Loading…</span>
           <label class="sort-lbl" for="sortSelect">
             Sort:
@@ -105,12 +115,9 @@
         </div>
       </section>
 
-      <!-- Shortlist compare view (hidden by default) -->
-      <section class="shortlist-panel" id="shortlistPanel" hidden aria-label="My shortlist">
+      <!-- My Shortlist tab panel -->
+      <section class="tab-panel shortlist-panel" id="shortlistPanel" hidden role="tabpanel" aria-label="My shortlist">
         <div class="results-bar">
-          <button class="panel-collapse-btn" id="shortlistCollapseBtn"
-                  aria-label="Collapse shortlist" title="Collapse shortlist">▾</button>
-          <h2 class="shortlist-heading">My Shortlist</h2>
           <button class="btn-export" id="exportCsvBtn">⬇ Export CSV</button>
         </div>
         <div class="table-wrap">

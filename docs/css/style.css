@@ -104,24 +104,7 @@ button { font-family: inherit; font-size: inherit; }
 }
 
 /* ── Shortlist button (header) ──────────────────────────────── */
-.shortlist-btn {
-  background: transparent;
-  border: 1px solid rgba(255,255,255,0.25);
-  color: var(--on-dark);
-  border-radius: 6px;
-  padding: 5px 12px;
-  cursor: pointer;
-  font-size: 0.82rem;
-  white-space: nowrap;
-  flex-shrink: 0;
-  transition: background 0.15s;
-}
-.shortlist-btn:hover { background: rgba(255,255,255,0.1); }
-.shortlist-btn[aria-pressed="true"] {
-  background: var(--teal-dark);
-  border-color: var(--teal);
-  color: #fff;
-}
+/* shortlist-btn removed — replaced by tab bar */
 
 /* ── App shell ──────────────────────────────────────────────── */
 body {
@@ -509,14 +492,53 @@ input[type="range"].f-slider {
 .panel-collapse-btn:hover { color: var(--text); background: var(--border); }
 .panel-collapse-btn.is-collapsed { transform: rotate(-90deg); }
 
-/* Collapsed panel — only bar visible, map fills remaining space */
-.results-panel.is-collapsed .table-wrap,
-.shortlist-panel.is-collapsed .table-wrap { display: none; }
-.results-panel.is-collapsed,
-.shortlist-panel.is-collapsed { flex: 0 0 auto; }
+/* ── List tab bar ───────────────────────────────────────────── */
+.list-tab-bar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 5px 10px 5px 14px;
+  background: var(--bg-alt);
+  border-bottom: 2px solid var(--border);
+  flex-shrink: 0;
+}
+.tab-pills { display: flex; gap: 4px; }
+.tab-pill {
+  background: none;
+  border: none;
+  cursor: pointer;
+  font-size: 0.8rem;
+  font-weight: 500;
+  padding: 5px 13px;
+  border-radius: 6px;
+  color: var(--text-muted);
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  transition: background 0.15s, color 0.15s;
+}
+.tab-pill:hover { background: var(--border); color: var(--text); }
+.tab-pill.is-active { background: var(--teal); color: #fff; }
+.shortlist-badge {
+  font-size: 0.7rem;
+  font-weight: 700;
+  background: var(--teal);
+  color: #fff;
+  border-radius: 10px;
+  padding: 1px 6px;
+  min-width: 18px;
+  text-align: center;
+}
+.tab-pill.is-active .shortlist-badge {
+  background: rgba(255,255,255,0.28);
+}
 
-.main-panel.list-collapsed .map-section { flex: 1 1 auto; }
+/* Collapsed panel — tabs stay visible, table content hidden, map fills space */
+.main-panel.list-collapsed .tab-panel .table-wrap { display: none; }
+.main-panel.list-collapsed .tab-panel .results-bar { border-bottom: none; }
+.main-panel.list-collapsed .tab-panel { flex: 0 0 auto; }
 .main-panel.list-collapsed .resize-handle { display: none; }
+.main-panel.list-collapsed .map-section { flex: 1 1 auto; }
 
 .results-info {
   font-size: 0.78rem;
@@ -703,8 +725,9 @@ input[type="range"].f-slider {
 /* ── Compare table ──────────────────────────────────────────── */
 /* Sites as rows, fields as columns — keeps height reasonable for the
    10-15 sites applicants typically shortlist, instead of one column per site. */
-.compare-table { min-width: max-content; }
+.compare-table { min-width: max-content; table-layout: auto; }
 .compare-table th, .compare-table td { min-width: 110px; white-space: nowrap; }
+.compare-table .td-trunc { max-width: 130px; overflow: hidden; text-overflow: ellipsis; }
 
 .compare-table .row-label {
   position: sticky;
