@@ -36,6 +36,7 @@ async function boot() {
   initDetail();
   initShortlist();
   initResizeHandle();
+  initCollapseToggles();
   initTour();
   renderShortlist(); // populate the shortlist panel immediately, don't wait for a star click
 
@@ -191,6 +192,42 @@ function deriveOptions(data) {
     modalities:      [...modalities].sort(),
     experienceAreas: [...experienceAreas].sort(),
   };
+}
+
+// ── Collapsible list / shortlist panels ──────────────────────
+function initCollapseToggles() {
+  const mainPanel  = document.getElementById('mainPanel');
+  const mapSection = document.querySelector('.map-section');
+
+  function setCollapsed(panel, btn, collapsed) {
+    panel.classList.toggle('is-collapsed', collapsed);
+    btn.classList.toggle('is-collapsed', collapsed);
+    btn.setAttribute('aria-label', collapsed ? 'Expand' : 'Collapse');
+
+    // Let map fill space when panel is collapsed; restore saved height when expanded
+    if (collapsed) {
+      mainPanel._savedMapHeight = mapSection.style.height;
+      mapSection.style.height   = '';
+      mainPanel.classList.add('list-collapsed');
+    } else {
+      mainPanel.classList.remove('list-collapsed');
+      if (mainPanel._savedMapHeight) {
+        mapSection.style.height = mainPanel._savedMapHeight;
+      }
+      resizeMap();
+    }
+  }
+
+  function wire(panelId, btnId) {
+    const panel = document.getElementById(panelId);
+    const btn   = document.getElementById(btnId);
+    btn.addEventListener('click', () => {
+      setCollapsed(panel, btn, !panel.classList.contains('is-collapsed'));
+    });
+  }
+
+  wire('resultsPanel',   'resultsCollapseBtn');
+  wire('shortlistPanel', 'shortlistCollapseBtn');
 }
 
 // ── Map resize handle ─────────────────────────────────────────
