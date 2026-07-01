@@ -1,8 +1,9 @@
-import { initMap, renderMarkers, getMapBounds } from './map.js';
+import { initMap, renderMarkers, getMapBounds, resizeMap } from './map.js';
 import { initFilters, clearAllFilters, getFilterPredicate } from './filters.js';
 import { renderList } from './list.js';
 import { initDetail, openDetail } from './detail.js';
 import { initShortlist, renderShortlist } from './shortlist.js';
+import { initTour } from './tour.js';
 
 const DATA_URL = './data/internships_full.json';
 
@@ -34,6 +35,8 @@ async function boot() {
   initMap('map');
   initDetail();
   initShortlist();
+  initResizeHandle();
+  initTour();
   renderShortlist(); // populate the shortlist panel immediately, don't wait for a star click
 
   // Sync list to map viewport on every pan/zoom
@@ -188,6 +191,46 @@ function deriveOptions(data) {
     modalities:      [...modalities].sort(),
     experienceAreas: [...experienceAreas].sort(),
   };
+}
+
+// ── Map resize handle ─────────────────────────────────────────
+function initResizeHandle() {
+  const handle     = document.getElementById('mapResizeHandle');
+  const mapSection = document.querySelector('.map-section');
+  const mainPanel  = document.getElementById('mainPanel');
+
+  const saved = localStorage.getItem('appic:mapHeight');
+  if (saved) mapSection.style.height = saved + 'px';
+
+  let startY, startH;
+
+  handle.addEventListener('mousedown', e => {
+    startY = e.clientY;
+    startH = mapSection.getBoundingClientRect().height;
+    handle.classList.add('is-dragging');
+    document.body.style.userSelect = 'none';
+    document.body.style.cursor     = 'ns-resize';
+
+    function onMove(e) {
+      const panelH = mainPanel.getBoundingClientRect().height;
+      const newH   = Math.min(Math.max(startH + e.clientY - startY, 120), panelH - 120);
+      mapSection.style.height = newH + 'px';
+      resizeMap();
+    }
+
+    function onUp() {
+      handle.classList.remove('is-dragging');
+      document.body.style.userSelect = '';
+      document.body.style.cursor     = '';
+      localStorage.setItem('appic:mapHeight', mapSection.getBoundingClientRect().height);
+      resizeMap();
+      document.removeEventListener('mousemove', onMove);
+      document.removeEventListener('mouseup',   onUp);
+    }
+
+    document.addEventListener('mousemove', onMove);
+    document.addEventListener('mouseup',   onUp);
+  });
 }
 
 // ── Error display ─────────────────────────────────────────────

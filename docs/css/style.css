@@ -919,6 +919,109 @@ input[type="range"].f-slider {
 }
 .d-link-outline:hover { border-color: var(--text-muted); color: var(--text); }
 
+/* ── Map resize handle ───────────────────────────────────────── */
+.resize-handle {
+  height: 8px;
+  background: var(--border);
+  cursor: ns-resize;
+  flex-shrink: 0;
+  position: relative;
+  z-index: 1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: background 0.15s;
+}
+.resize-handle:hover,
+.resize-handle.is-dragging { background: var(--accent); }
+.resize-handle::after {
+  content: '';
+  width: 36px;
+  height: 3px;
+  border-radius: 2px;
+  background: rgba(0,0,0,0.18);
+  pointer-events: none;
+}
+.resize-handle:hover::after,
+.resize-handle.is-dragging::after { background: rgba(255,255,255,0.55); }
+
+/* ── Orientation tour ────────────────────────────────────────── */
+.tour-overlay {
+  position: fixed;
+  inset: 0;
+  z-index: 9000;
+  pointer-events: none;
+}
+.tour-spotlight {
+  position: fixed;
+  border-radius: 8px;
+  box-shadow: 0 0 0 9999px rgba(0,0,0,0.58);
+  pointer-events: none;
+  transition: top 0.32s ease, left 0.32s ease, width 0.32s ease, height 0.32s ease;
+}
+.tour-card {
+  position: fixed;
+  background: #fff;
+  border-radius: 12px;
+  padding: 18px 20px 14px;
+  width: 285px;
+  box-shadow: 0 8px 32px rgba(0,0,0,0.28);
+  pointer-events: all;
+  z-index: 9001;
+  transition: top 0.32s ease, left 0.32s ease;
+}
+.tour-dots {
+  display: flex;
+  gap: 5px;
+  margin-bottom: 10px;
+}
+.tour-dot {
+  height: 6px;
+  width: 6px;
+  border-radius: 3px;
+  background: #cbd5e1;
+  transition: width 0.2s ease, background 0.2s ease;
+}
+.tour-dot.active { width: 18px; background: var(--accent); }
+.tour-title {
+  font-weight: 700;
+  font-size: 0.88rem;
+  color: var(--text);
+  margin: 0 0 6px;
+}
+.tour-msg {
+  font-size: 0.82rem;
+  color: var(--text-muted);
+  line-height: 1.52;
+  margin: 0 0 14px;
+}
+.tour-btns {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+.tour-skip {
+  font-size: 0.78rem;
+  color: var(--text-muted);
+  background: none;
+  border: none;
+  cursor: pointer;
+  padding: 4px 0;
+}
+.tour-skip:hover { color: var(--text); }
+.tour-next {
+  background: var(--accent);
+  color: #fff;
+  border: none;
+  border-radius: 6px;
+  padding: 7px 18px;
+  font-size: 0.82rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: background 0.15s;
+}
+.tour-next:hover { filter: brightness(1.1); }
+
 /* ── Responsive ─────────────────────────────────────────────── */
 @media (max-width: 768px) {
   .sidebar {

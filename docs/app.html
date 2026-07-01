@@ -59,6 +59,11 @@
         <div id="map" role="application" aria-label="Interactive map of APPIC internship sites"></div>
       </section>
 
+      <!-- Map / list resize handle -->
+      <div class="resize-handle" id="mapResizeHandle"
+           role="separator" aria-orientation="horizontal"
+           title="Drag to resize map" aria-label="Drag to resize map"></div>
+
       <!-- Results table -->
       <section class="results-panel" id="resultsPanel" aria-label="Internship results">
         <div class="results-bar">
@@ -139,6 +144,20 @@
     </div>
     <div class="slide-body" id="slideBody"></div>
   </aside>
+
+  <!-- ── Orientation tour ─────────────────────────────────────── -->
+  <div id="tourOverlay" class="tour-overlay" hidden aria-hidden="true">
+    <div id="tourSpotlight" class="tour-spotlight"></div>
+    <div id="tourCard" class="tour-card" role="dialog" aria-label="Feature tour">
+      <div class="tour-dots" id="tourDots"></div>
+      <p class="tour-title" id="tourTitle"></p>
+      <p class="tour-msg"   id="tourMsg"></p>
+      <div class="tour-btns">
+        <button class="tour-skip" id="tourSkip">Skip tour</button>
+        <button class="tour-next" id="tourNext">Next →</button>
+      </div>
+    </div>
+  </div>
 
   <!-- ── Scripts ───────────────────────────────────────────── -->
   <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
