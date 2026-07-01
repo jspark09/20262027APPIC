@@ -151,7 +151,24 @@
     .card-warn {
       border-left: 4px solid #f59e0b;
     }
-    .card-warn h2 { color: #92400e; }
+    .card-warn h2 { color: #92400e; display: inline; margin-bottom: 0; }
+    .card-warn summary {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      cursor: pointer;
+      list-style: none;
+    }
+    .card-warn summary::-webkit-details-marker { display: none; }
+    .card-warn summary .card-icon { margin-bottom: 0; }
+    .card-warn summary::after {
+      content: '▸';
+      margin-left: auto;
+      color: var(--text-muted);
+      transition: transform .15s;
+    }
+    .card-warn[open] summary::after { transform: rotate(90deg); }
+    .card-warn p:first-of-type { margin-top: 16px; }
 
     ul.disc {
       padding-left: 20px;
@@ -190,7 +207,9 @@
       on an interactive map, built for psychology doctoral students.
     </p>
     <a href="./app.html" class="cta-btn">Explore Internship Sites →</a>
-    <p class="hero-note">Data snapshot: June 1, 2026</p>
+    <p class="hero-note">
+      Data snapshot: June 1, 2026 · Self-reported by sites · Not affiliated with APPIC
+    </p>
   </section>
 
   <!-- Content -->
@@ -217,9 +236,11 @@
     </div>
 
     <!-- Disclaimer -->
-    <div class="card card-warn">
-      <span class="card-icon">⚠️</span>
-      <h2>Important: Verify all information before applying</h2>
+    <details class="card card-warn">
+      <summary>
+        <span class="card-icon">⚠️</span>
+        <h2>Important: Verify all information before applying</h2>
+      </summary>
       <p>
         This site displays a <strong>static snapshot</strong> scraped from the public
         <a href="https://www.appic.org/Internships/Search-the-AI-and-AOI"
@@ -249,7 +270,7 @@
           and the AAPI Online portal directly.
         </li>
       </ul>
-    </div>
+    </details>
 
   </main>
 
