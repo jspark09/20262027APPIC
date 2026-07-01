@@ -2,7 +2,7 @@ import { initMap, renderMarkers, getMapBounds, resizeMap } from './map.js';
 import { initFilters, clearAllFilters, getFilterPredicate } from './filters.js';
 import { renderList } from './list.js';
 import { initDetail, openDetail } from './detail.js';
-import { initShortlist, renderShortlist } from './shortlist.js';
+import { initShortlist, renderShortlist, getShortlist } from './shortlist.js';
 import { initTour } from './tour.js';
 
 const DATA_URL = './data/internships_full.json';
@@ -36,6 +36,8 @@ async function boot() {
   initShortlist();
   initResizeHandle();
   initTabSwitcher();
+  // Seed badge with count already loaded from localStorage before the listener was wired
+  document.getElementById('shortlistCount').textContent = getShortlist().length;
   initCollapseToggle();
   initTour();
   renderShortlist(); // populate the shortlist panel immediately, don't wait for a star click
