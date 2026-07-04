@@ -54861,7 +54861,7 @@
     "fringe_benefits": "Professional Development Time,\n              \n            \n              Sick Leave,\n              \n                  \n              Vacation",
     "accepting_applicants": true,
     "application_due_date": "12/01/2025 11:59 PM EST",
-    "us_citizenship_required": true,
+    "us_citizenship_required": false,
     "noncitizen_work_auth_required": false,
     "min_intervention_hours": null,
     "min_assessment_hours": null,
