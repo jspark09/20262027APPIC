@@ -65,6 +65,13 @@ export function getMapBounds() {
   return mapInstance?.getBounds() ?? null;
 }
 
+// Zoom/pan the map to a specific site, e.g. from a search selection.
+export function flyToSite(site) {
+  if (!mapInstance || site.lat == null || site.lng == null) return;
+  const targetZoom = Math.max(mapInstance.getZoom(), 13);
+  mapInstance.flyTo([site.lat, site.lng], targetZoom, { duration: 0.8 });
+}
+
 export function renderMarkers(data, onClickFn) {
   if (!mapInstance || !clusterGroup) return;
   clusterGroup.clearLayers();

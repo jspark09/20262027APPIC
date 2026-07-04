@@ -1,9 +1,10 @@
-import { initMap, renderMarkers, getMapBounds, resizeMap } from './map.js';
+import { initMap, renderMarkers, getMapBounds, resizeMap, flyToSite } from './map.js';
 import { initFilters, clearAllFilters, getFilterPredicate } from './filters.js';
 import { renderList } from './list.js';
 import { initDetail, openDetail } from './detail.js';
 import { initShortlist, renderShortlist, getShortlist } from './shortlist.js';
 import { initTour } from './tour.js';
+import { initSearch } from './search.js';
 
 const DATA_URL = './data/internships_full.json';
 
@@ -40,6 +41,10 @@ async function boot() {
   document.getElementById('shortlistCount').textContent = getShortlist().length;
   initCollapseToggle();
   initTour();
+  initSearch(allData, site => {
+    flyToSite(site);
+    openDetail(site);
+  });
   renderShortlist(); // populate the shortlist panel immediately, don't wait for a star click
 
   // Sync list to map viewport on every pan/zoom

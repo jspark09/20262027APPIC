@@ -53,6 +53,18 @@
 
       <!-- Map -->
       <section class="map-section" aria-label="Map of internship sites">
+        <div class="map-search" role="search">
+          <div class="map-search-box">
+            <span class="map-search-icon" aria-hidden="true">🔍</span>
+            <input type="text" id="siteSearchInput" class="map-search-input"
+                   placeholder="Search sites by name, city, or state…"
+                   autocomplete="off" spellcheck="false"
+                   role="combobox" aria-autocomplete="list" aria-expanded="false"
+                   aria-controls="siteSearchResults" aria-label="Search internship sites">
+            <button class="map-search-clear" id="siteSearchClear" aria-label="Clear search" hidden>✕</button>
+          </div>
+          <ul class="map-search-results" id="siteSearchResults" role="listbox" hidden></ul>
+        </div>
         <div id="map" role="application" aria-label="Interactive map of APPIC internship sites"></div>
       </section>
 
