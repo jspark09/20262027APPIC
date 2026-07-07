@@ -3,18 +3,19 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>APPIC Internship Explorer — Temporarily Unavailable</title>
+  <title></title>
   <style>
     :root {
       --navy:       #1e3a5f;
       --navy-dim:   #0c2640;
+      --navy-light: #2a4d7a;
+      --teal:       #0d9488;
       --teal-light: #14b8a6;
-      --text-muted: #64748b;
     }
     *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
     body {
       font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
-      background: var(--navy-dim);
+      background: radial-gradient(circle at 50% 0%, var(--navy) 0%, var(--navy-dim) 70%);
       color: #e0f2fe;
       min-height: 100vh;
       display: flex;
@@ -23,20 +24,40 @@
       padding: 24px;
     }
     .card {
-      max-width: 480px;
+      max-width: 420px;
       text-align: center;
       background: var(--navy);
-      border-radius: 12px;
-      padding: 40px 32px;
-      box-shadow: 0 10px 40px rgba(0,0,0,.3);
+      border: 1px solid var(--navy-light);
+      border-radius: 16px;
+      padding: 48px 36px;
+      box-shadow: 0 20px 60px rgba(0,0,0,.35);
     }
-    p { font-size: .95rem; line-height: 1.6; color: #cbd5e1; }
+    .btn {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      margin-top: 4px;
+      padding: 12px 28px;
+      background: var(--teal);
+      color: #fff;
+      font-size: .95rem;
+      font-weight: 600;
+      text-decoration: none;
+      border-radius: 99px;
+      transition: background .15s ease, transform .15s ease;
+    }
+    .btn:hover { background: var(--teal-light); transform: translateY(-1px); }
+    .btn svg { width: 15px; height: 15px; }
   </style>
 </head>
 <body>
   <div class="card">
-    <p>Please refer to the
-      <a href="https://www.appic.org/Internships/Search-the-AI-and-AOI" style="color: var(--teal-light);">official APPIC directory</a>.</p>
+    <a class="btn" href="https://www.appic.org/" target="_blank" rel="noopener noreferrer">
+      Visit APPIC.org
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+        <path d="M7 17 17 7"/><path d="M7 7h10v10"/>
+      </svg>
+    </a>
   </div>
 </body>
 </html>
