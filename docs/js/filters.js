@@ -16,6 +16,7 @@ const LEVEL_SHORT = {
 // ── State ────────────────────────────────────────────────────
 let state = makeDefault();
 let onChange = null;
+let gaDebounceTimer = null;
 
 function makeDefault() {
   return {
@@ -515,4 +516,9 @@ function resetUI() {
 function emit() {
   // Update match-count display inside each accordion (handled in app.js)
   onChange(state);
+
+  clearTimeout(gaDebounceTimer);
+  gaDebounceTimer = setTimeout(() => {
+    window.gtag?.('event', 'filter_apply');
+  }, 800);
 }

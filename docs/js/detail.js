@@ -31,6 +31,8 @@ export function initDetail() {
 export function openDetail(site) {
   currentSite = site;
 
+  window.gtag?.('event', 'site_detail_view', { site_name: site.site });
+
   document.getElementById('slideTitle').textContent = site.site;
   document.getElementById('slideSubtitle').textContent = [
     site.department,

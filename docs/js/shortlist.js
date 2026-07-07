@@ -24,14 +24,16 @@ export function isStarred(id) {
 
 export function toggleStar(site) {
   const id = siteId(site);
-  if (shortlist.has(id)) {
-    shortlist.delete(id);
-  } else {
+  const adding = !shortlist.has(id);
+  if (adding) {
     shortlist.set(id, site);
+  } else {
+    shortlist.delete(id);
   }
   persist();
   dispatch();
   renderShortlist();
+  window.gtag?.('event', 'shortlist_toggle', { site_name: site.site, action: adding ? 'add' : 'remove' });
 }
 
 export function getShortlist() {
@@ -109,6 +111,8 @@ document.getElementById('compareBody')?.addEventListener('click', e => {
 function exportCsv() {
   const sites = getShortlist();
   if (!sites.length) { alert('Your shortlist is empty.'); return; }
+
+  window.gtag?.('event', 'export_csv', { site_count: sites.length });
 
   const COLS = [
     ['Site', s => s.site],

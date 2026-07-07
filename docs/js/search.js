@@ -72,6 +72,7 @@ function selectSite(site) {
   inputEl.value = site.site || '';
   closeResults();
   onSelect(site);
+  window.gtag?.('event', 'search_select', { site_name: site.site });
 }
 
 function closeResults() {
