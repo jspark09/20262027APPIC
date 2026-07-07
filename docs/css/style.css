@@ -72,19 +72,20 @@ button { font-family: inherit; font-size: inherit; }
   white-space: nowrap;
 }
 
-.header-byline {
-  font-size: 0.75rem;
-  color: var(--on-muted);
+.header-contact {
+  flex-shrink: 0;
+  font-size: 0.78rem;
+  font-weight: 600;
+  color: var(--on-dark);
   white-space: nowrap;
-}
-
-.header-byline a {
-  color: inherit;
   text-decoration: none;
+  padding: 5px 12px;
+  border: 1px solid var(--navy-light);
+  border-radius: 99px;
 }
 
-.header-byline a:hover {
-  text-decoration: underline;
+.header-contact:hover {
+  background: var(--navy-light);
 }
 
 .header-banner {
@@ -1184,10 +1185,10 @@ input[type="range"].f-slider {
 
   .header-title { font-size: 0.9rem; }
   .header-cycle { display: none; }
-  .header-byline { display: none; }
 }
 
 @media (max-width: 480px) {
+  .header-contact { padding: 4px 9px; font-size: 0.72rem; }
   .results-bar { flex-direction: column; align-items: flex-start; gap: 5px; }
   .sort-lbl { font-size: 0.75rem; }
 }
