@@ -65,6 +65,13 @@
       border-radius: 99px;
       letter-spacing: .04em;
     }
+    .header-byline {
+      margin-left: auto;
+      font-size: .75rem;
+      color: #9fb8d4;
+    }
+    .header-byline a { color: inherit; text-decoration: none; }
+    .header-byline a:hover { text-decoration: underline; }
 
     /* ── Hero ───────────────────────────────────────────────── */
     .hero {
@@ -118,6 +125,14 @@
       font-size: .78rem;
       color: #7fa8c9;
     }
+
+    .hero-credit {
+      margin-top: 8px;
+      font-size: .78rem;
+      color: #7fa8c9;
+    }
+    .hero-credit a { color: var(--teal-light); text-decoration: none; }
+    .hero-credit a:hover { text-decoration: underline; }
 
     /* ── Content sections ───────────────────────────────────── */
     main {
@@ -207,6 +222,7 @@
   <header>
     <span class="header-title">APPIC Internship Explorer</span>
     <span class="header-cycle">2026–27</span>
+    <span class="header-byline">by <a href="https://junsangpark.com" target="_blank" rel="noopener noreferrer">Junsang Park</a></span>
   </header>
 
   <!-- Hero -->
@@ -220,6 +236,9 @@
     <a href="./app.html" class="cta-btn">Explore Internship Sites →</a>
     <p class="hero-note">
       Data snapshot: June 1, 2026 · Self-reported by sites · Not affiliated with APPIC
+    </p>
+    <p class="hero-credit">
+      Built by <a href="https://junsangpark.com" target="_blank" rel="noopener noreferrer">Junsang Park</a>
     </p>
   </section>
 
