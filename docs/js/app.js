@@ -129,7 +129,12 @@ function initTabSwitcher() {
     tabShortlist.setAttribute('aria-selected', String(!toList));
     resultsPanel.hidden = !toList;
     slPanel.hidden      = toList;
-    if (!toList) renderShortlist();
+    if (toList) {
+      renderMarkers(filteredData, openDetail);
+    } else {
+      renderShortlist();
+      renderMarkers(getShortlist(), openDetail);
+    }
   }
 
   tabList.addEventListener('click',      () => switchTo('list'));
@@ -138,7 +143,10 @@ function initTabSwitcher() {
   window.addEventListener('appic:shortlist-change', e => {
     const badge = document.getElementById('shortlistCount');
     if (badge) badge.textContent = e.detail.count;
-    if (!slPanel.hidden) renderShortlist();
+    if (!slPanel.hidden) {
+      renderShortlist();
+      renderMarkers(getShortlist(), openDetail);
+    }
   });
 }
 

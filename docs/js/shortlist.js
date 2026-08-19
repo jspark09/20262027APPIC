@@ -1,4 +1,6 @@
 import { siteId, formatStipend, formatDate, formatBool, esc } from './utils.js';
+import { openDetail } from './detail.js';
+import { flyToSite } from './map.js';
 
 const STORAGE_KEY = 'appic-shortlist-2026';
 const shortlist = new Map(); // id → site
@@ -102,9 +104,20 @@ export function renderShortlist() {
 
 document.getElementById('compareBody')?.addEventListener('click', e => {
   const btn = e.target.closest('[data-remove-id]');
-  if (!btn) return;
-  const site = shortlist.get(btn.dataset.removeId);
-  if (site) toggleStar(site);
+  if (btn) {
+    const site = shortlist.get(btn.dataset.removeId);
+    if (site) toggleStar(site);
+    return;
+  }
+
+  const tr = e.target.closest('tr[data-sid]');
+  if (tr) {
+    const site = shortlist.get(tr.dataset.sid);
+    if (site) {
+      flyToSite(site);
+      openDetail(site);
+    }
+  }
 });
 
 // ── CSV export ───────────────────────────────────────────────
