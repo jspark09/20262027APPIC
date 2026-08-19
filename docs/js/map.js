@@ -52,17 +52,7 @@ export function initMap(containerId) {
   });
   mapInstance.addLayer(clusterGroup);
 
-  mapInstance.on('moveend zoomend', () => {
-    window.dispatchEvent(new CustomEvent('appic:bounds-change', {
-      detail: { bounds: mapInstance.getBounds() },
-    }));
-  });
-
   return mapInstance;
-}
-
-export function getMapBounds() {
-  return mapInstance?.getBounds() ?? null;
 }
 
 // Zoom/pan the map to a specific site, e.g. from a search selection.

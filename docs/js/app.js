@@ -1,4 +1,4 @@
-import { initMap, renderMarkers, getMapBounds, resizeMap, flyToSite } from './map.js';
+import { initMap, renderMarkers, resizeMap, flyToSite } from './map.js';
 import { initFilters, clearAllFilters, getFilterPredicate } from './filters.js';
 import { renderList } from './list.js';
 import { initDetail, openDetail } from './detail.js';
@@ -12,7 +12,6 @@ let allData      = [];
 let filteredData = [];   // passes sidebar filters
 let currentSort  = 'stipend_desc';
 let currentHours = { intervention: null, assessment: null };
-let mapBounds    = null; // null until first moveend fires
 
 // ── Boot ─────────────────────────────────────────────────────
 async function boot() {
@@ -47,12 +46,6 @@ async function boot() {
   });
   renderShortlist(); // populate the shortlist panel immediately, don't wait for a star click
 
-  // Sync list to map viewport on every pan/zoom
-  window.addEventListener('appic:bounds-change', e => {
-    mapBounds = e.detail.bounds;
-    renderListInView();
-  });
-
   // Derive dynamic filter options from data
   const options = deriveOptions(allData);
 
@@ -71,11 +64,8 @@ function onFiltersChange(filterState) {
 
   filteredData = allData.filter(getFilterPredicate(filterState));
 
-  // Map always shows everything that passes sidebar filters
   renderMarkers(filteredData, openDetail);
-
-  // List is additionally constrained to current viewport
-  renderListInView();
+  updateResultsList();
 
   const total = allData.length;
   const shown = filteredData.length;
@@ -85,26 +75,18 @@ function onFiltersChange(filterState) {
       : `<strong>${shown}</strong> of ${total} sites`;
 }
 
-// ── Render list limited to current map viewport ───────────────
-function renderListInView() {
-  const bounds  = mapBounds ?? getMapBounds();
-  const inView  = bounds
-    ? filteredData.filter(s => bounds.contains([s.lat, s.lng]))
-    : filteredData;
-
-  renderList(inView, currentSort, currentHours);
-
-  const viewTxt = bounds && inView.length < filteredData.length
-    ? `${inView.length} in map view (${filteredData.length} match filters)`
-    : `${inView.length} site${inView.length !== 1 ? 's' : ''}`;
-  document.getElementById('resultsInfo').textContent = viewTxt;
+// ── Render list ─────────────────────────────────────────────
+function updateResultsList() {
+  renderList(filteredData, currentSort, currentHours);
+  document.getElementById('resultsInfo').textContent =
+    `${filteredData.length} site${filteredData.length !== 1 ? 's' : ''}`;
 }
 
 // ── Sort ─────────────────────────────────────────────────────
 function setupSortListener() {
   document.getElementById('sortSelect').addEventListener('change', e => {
     currentSort = e.target.value;
-    renderListInView();
+    updateResultsList();
   });
 }
 
