@@ -95,6 +95,9 @@ function buildBody(s) {
     links.push(`<a href="${esc(s.web_address)}" target="_blank" rel="noopener" class="d-link d-link-outline">Program Site ↗</a>`);
   if (s.brochure_url && s.brochure_url !== s.web_address)
     links.push(`<a href="${esc(s.brochure_url)}" target="_blank" rel="noopener" class="d-link d-link-outline">Brochure ↗</a>`);
+  const mapQuery = s.address || (s.lat != null && s.lng != null ? `${s.lat},${s.lng}` : null);
+  if (mapQuery)
+    links.push(`<a href="https://www.google.com/maps/search/?api=1&query=${encodeURIComponent(mapQuery)}" target="_blank" rel="noopener" class="d-link d-link-outline">Open in Google Maps ↗</a>`);
   if (links.length) {
     parts.push(section('Links', `<div class="detail-links">${links.join('')}</div>`));
   }

@@ -8,9 +8,15 @@ const STEPS = [
     placement: 'right',
   },
   {
+    target:    '.map-section',
+    title:     'Interactive Map',
+    msg:       'Solid teal markers are precisely geocoded; hollow dashed markers are approximate. Click any marker — or a row in the list below — to zoom in and open full site details.',
+    placement: 'below',
+  },
+  {
     target:    '#resultsPanel',
     title:     'Results List',
-    msg:       'Every site visible on the map appears here. Click any row to open full details. Use ☆ on a row to save a site to your shortlist.',
+    msg:       'Every site visible on the map appears here. Click any row to fly to it on the map and open full details. Use ☆ on a row to save a site to your shortlist.',
     placement: 'above',
   },
   {

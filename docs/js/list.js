@@ -1,6 +1,7 @@
 import { formatStipend, siteId, esc } from './utils.js';
 import { isStarred, toggleStar } from './shortlist.js';
 import { openDetail } from './detail.js';
+import { flyToSite } from './map.js';
 
 // Module state — updated on each renderList call
 let currentData = [];
@@ -46,7 +47,10 @@ function handleBodyClick(e) {
   const tr = e.target.closest('tr[data-idx]');
   if (tr) {
     const idx = +tr.dataset.idx;
-    if (!isNaN(idx) && currentData[idx]) openDetail(currentData[idx]);
+    if (!isNaN(idx) && currentData[idx]) {
+      flyToSite(currentData[idx]);
+      openDetail(currentData[idx]);
+    }
   }
 }
 
